@@ -1,0 +1,6 @@
+# Ignore Bootstrap Files
+
+Content/
+Scripts/
+packages.config
+Web.config

@@ -1,0 +1,21 @@
+﻿body{
+    font-family : "Lato", sans-serif;
+    width : auto;
+}
+
+.main{
+    padding : 70px 0px;
+   
+}
+
+.btn-custom-h{
+    padding : 5% 0%;
+}
+
+.login-form{
+    padding : 30px;
+}
+
+.explain-area{
+    padding : 50px;
+}
