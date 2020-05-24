@@ -1,0 +1,14 @@
+﻿body {
+    font-family: "Lato", sans-serif;
+    width : auto;
+}
+
+
+.btn-custom-h {
+    padding: 5% 0%;
+}
+
+.login-form{
+    padding : 70px 30px;
+}
+
