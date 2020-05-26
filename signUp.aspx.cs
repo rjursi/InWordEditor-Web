@@ -143,35 +143,39 @@ public partial class signUp : System.Web.UI.Page
 
     protected void btn_idDubCheck_Click(object sender, EventArgs e)
     {
-        SqlConnection conn = new SqlConnection("Data Source=.\\SQLEXPRESS;" +
-           "Initial Catalog=InWordEditor;" +
-           "Integrated Security=True");
-
-
-        string sql = "SELECT UserID FROM Member WHERE UserID = @UserID";
-
-        SqlCommand cmd = new SqlCommand(sql, conn);
-        cmd.Parameters.AddWithValue("@UserID", txtbox_signUp_userID.Text);
-
-        conn.Open();
-        SqlDataReader rd = cmd.ExecuteReader();
-
-        if (rd.HasRows)
+        if(txtbox_signUp_userID.Text != "")
         {
-            lbl_userIDCheck.Text = "이미 사용중인 아이디 입니다.";
-            lbl_userIDCheck.CssClass = "text-danger";
-            isIDDuplicate = true;
-        }
-        else
-        {
-            lbl_userIDCheck.Text = "사용 가능한 아이디 입니다.";
-            lbl_userIDCheck.CssClass = "text-success";
-            isIDDuplicate = false;
-        }
 
-        rd.Close();
-        conn.Close();
+        
+            SqlConnection conn = new SqlConnection("Data Source=.\\SQLEXPRESS;" +
+               "Initial Catalog=InWordEditor;" +
+               "Integrated Security=True");
 
+
+            string sql = "SELECT UserID FROM Member WHERE UserID = @UserID";
+
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@UserID", txtbox_signUp_userID.Text);
+
+            conn.Open();
+            SqlDataReader rd = cmd.ExecuteReader();
+
+            if (rd.HasRows)
+            {
+                lbl_userIDCheck.Text = "이미 사용중인 아이디 입니다.";
+                lbl_userIDCheck.CssClass = "text-danger";
+                isIDDuplicate = true;
+            }
+            else
+            {
+                lbl_userIDCheck.Text = "사용 가능한 아이디 입니다.";
+                lbl_userIDCheck.CssClass = "text-success";
+                isIDDuplicate = false;
+            }
+
+            rd.Close();
+            conn.Close();
+        }
 
     }
 
@@ -187,7 +191,7 @@ public partial class signUp : System.Web.UI.Page
         string sql = "SELECT EmailAddress FROM Member WHERE EmailAddress = @EmailAddress";
 
         SqlCommand cmd = new SqlCommand(sql, conn);
-        string emailAddress = txtbox_signUp_userEmailID + "@" + txtbox_signUp_userEmailAddress;
+        string emailAddress = txtbox_signUp_userEmailID.Text + "@" + txtbox_signUp_userEmailAddress.Text;
         cmd.Parameters.AddWithValue("@EmailAddress", emailAddress);
 
         conn.Open();

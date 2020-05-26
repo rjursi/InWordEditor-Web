@@ -46,7 +46,7 @@
                             <asp:Label ID="lbl_password" runat="server" Text="패스워드"></asp:Label>
                                 <asp:TextBox ID="txtbox_signUp_userPassword" runat="server" CssClass="form-control mt-2" TextMode="Password" OnPreRender="txtbox_signUp_userPassword_PreRender"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="requireFieldValidator_userPassword" runat="server" ErrorMessage="패스워드를 입력하지 않으셨습니다." ControlToValidate="txtbox_signUp_userPassword" Display="Dynamic" CssClass="text-danger mt-2"></asp:RequiredFieldValidator>
-                                <asp:RegularExpressionValidator ID="regularExVaildator_userPassword" runat="server" ErrorMessage="패스워드의 길이는 최소 8자 이상이여야 하며 최소 하나의 문자 및 숫자를 포함해야 합니다." ControlToValidate="txtbox_signUp_userPassword" Display="Dynamic" ValidationExpression="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" CssClass="text-danger mt-2"></asp:RegularExpressionValidator>
+                                <asp:RegularExpressionValidator ID="regularExVaildator_userPassword" runat="server" ErrorMessage="패스워드의 길이는 최소 8자 이상이여야 하며 최소 하나의 문자, 특수문자 및 숫자를 포함해야 합니다." ControlToValidate="txtbox_signUp_userPassword" Display="Dynamic" CssClass="text-danger mt-2" ValidationExpression="^.*(?=^.{8,}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[_!@#$%^&+=]).*$"></asp:RegularExpressionValidator>
                         </div>
                         <div class="form-group">
                             <label>이메일 주소</label>
