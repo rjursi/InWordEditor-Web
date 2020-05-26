@@ -25,12 +25,26 @@
                         </div>
                         <div class="form-group">    
                             <label>사용자 ID</label>
-                            <asp:TextBox ID="txtbox_signUp_userID" runat="server" CssClass="form-control" TextMode="SingleLine"></asp:TextBox>
+                            <div class="row">
+                                <div class="col-md-8">
+                                   <asp:TextBox ID="txtbox_signUp_userID" runat="server" CssClass="form-control" TextMode="SingleLine"></asp:TextBox>
+                                </div>
+                                <div class="col-md-4">
+                                    <asp:Button ID="btn_idDubCheck" runat="server" Text="중복 검사" CssClass="btn btn-primary w-100" OnClick="btn_idDubCheck_Click" CausesValidation="False" />
+                                </div>
+                            </div>
+                            <asp:Label ID="lbl_userIDCheck" runat="server"></asp:Label>
                             <asp:RequiredFieldValidator ID="requireFieldValidator_signUpPage_userID" runat="server" ErrorMessage="사용할 ID를 입력해주세요." ControlToValidate="txtbox_signUp_userID" CssClass="text-danger mt-2"></asp:RequiredFieldValidator>
                         </div>
                         <div class="form-group">
+                            <label>사용자 이름</label>
+                            
+                               <asp:TextBox ID="txtbox_signUp_userName" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="requireFieldValidator_signUpPage_userName" runat="server" ErrorMessage="사용자 이름을 입력해주세요." ControlToValidate="txtbox_signUp_userName" CssClass="text-danger mt-2"></asp:RequiredFieldValidator>
+                        </div>
+                        <div class="form-group">
                             <asp:Label ID="lbl_password" runat="server" Text="패스워드"></asp:Label>
-                                <asp:TextBox ID="txtbox_signUp_userPassword" runat="server" CssClass="form-control mt-2" TextMode="Password"></asp:TextBox>
+                                <asp:TextBox ID="txtbox_signUp_userPassword" runat="server" CssClass="form-control mt-2" TextMode="Password" OnPreRender="txtbox_signUp_userPassword_PreRender"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="requireFieldValidator_userPassword" runat="server" ErrorMessage="패스워드를 입력하지 않으셨습니다." ControlToValidate="txtbox_signUp_userPassword" Display="Dynamic" CssClass="text-danger mt-2"></asp:RequiredFieldValidator>
                                 <asp:RegularExpressionValidator ID="regularExVaildator_userPassword" runat="server" ErrorMessage="패스워드의 길이는 최소 8자 이상이여야 하며 최소 하나의 문자 및 숫자를 포함해야 합니다." ControlToValidate="txtbox_signUp_userPassword" Display="Dynamic" ValidationExpression="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" CssClass="text-danger mt-2"></asp:RegularExpressionValidator>
                         </div>
@@ -39,8 +53,6 @@
                             <div class="row">
                                 <div class="col-md-4 pr-0">
                                     <asp:TextBox ID="txtbox_signUp_userEmailID" runat="server" CssClass="form-control" TextMode="SingleLine"></asp:TextBox>
-                                    
-                                    
                                 </div>
                                 <div class="col-md-4 pl-0 pr-0">
                                     <div class="input-group">
@@ -63,6 +75,8 @@
                                     </div>
                                 </div>
                             </div>
+                            <asp:Button ID="btn_emailDubCheck" runat="server" Text="이메일 주소 중복 체크" CssClass="mt-2 btn btn-primary w-100" OnClick="btn_emailDubCheck_Click" CausesValidation="False"/>
+                            <asp:Label ID="lbl_emailDubCheck" runat="server"></asp:Label>
                             <asp:RequiredFieldValidator ID="requiredFieldValidator_signUpPage_userEmailID" runat="server" Display="Dynamic" ControlToValidate="txtbox_signUp_userEmailID" ErrorMessage="이메일 ID를 입력하지 않으셨습니다.<br/>" CssClass="text-danger mt-2"></asp:RequiredFieldValidator>
                             <asp:RequiredFieldValidator ID="requiredFieldValidator_signUpPage_userEmailAddress" runat="server" Display="Dynamic" ControlToValidate="txtbox_signUp_userEmailAddress" ErrorMessage="이메일 주소를 입력하지 않으셨습니다." CssClass="text-danger mt-2"></asp:RequiredFieldValidator>
 
@@ -78,7 +92,7 @@
                              <div class="row">
                                 <div class="col-md-4 pr-0">
                                     <div class="input-group">
-                                        <asp:DropDownList ID="ddList_phoneNum_1" runat="server" CssClass="w-75" AutoPostBack="True">
+                                        <asp:DropDownList ID="ddList_phoneNum_1" runat="server" CssClass="w-75">
                                             <asp:ListItem>010</asp:ListItem>
                                             <asp:ListItem>011</asp:ListItem>
                                             <asp:ListItem>017</asp:ListItem>

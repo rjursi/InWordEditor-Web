@@ -1,0 +1,10 @@
+﻿body {
+    font-family: "Lato", sans-serif;
+    width: auto;
+}
+.success-form {
+    padding: 70px 30px;
+}
+.btn-custom-h {
+    padding: 5% 0%;
+}
