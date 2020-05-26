@@ -1,6 +1,7 @@
 ﻿body {
     font-family: "Lato", sans-serif;
     width : auto;
+    
 }
 
 
@@ -10,5 +11,6 @@
 
 .login-form{
     padding : 70px 30px;
+    
 }
 

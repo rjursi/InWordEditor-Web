@@ -14,11 +14,11 @@
     
     <title>로그인</title>
 </head>
-<body>
+<body style="background-color : #1C1C1C">
     <form id="form_signIn" runat="server">
-        <div class="container-fluid p-0 min-vh-100">
+        <div class="container-fluid p-0 min-vh-100 overflow-hidden">
             <div class="row min-vh-100 justify-content-md-center align-items-center">
-                <div class="col-lg-4 col-md-4 border">
+                <div class="col-lg-4 col-md-4 border bg-white rounded">
                     <div class="login-form">
                         <div class="form-group mb-5">
                             <asp:Label ID="lbl_title" runat="server" Text="사용자 로그인" Font-Bold="True" Font-Size="XX-Large"></asp:Label>
@@ -33,7 +33,7 @@
                         </div>
                         <asp:Button ID="btn_signIn" runat="server" Text="로그인" CssClass="btn btn-block btn-success btn-custom-h" />
                         <label class="pt-5">아직 회원이 아니신가요?</label>
-                        <asp:LinkButton ID="linkBtn_signUp" runat="server">여기를 눌러 회원가입 하세요</asp:LinkButton>
+                        <asp:LinkButton ID="linkBtn_signUp" runat="server" PostBackUrl="~/signUp.aspx">여기를 눌러 회원가입 하세요</asp:LinkButton>
                     </div>
                 </div>        
             </div>

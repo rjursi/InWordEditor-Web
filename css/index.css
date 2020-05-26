@@ -1,6 +1,7 @@
-﻿body{
-    font-family : "Lato", sans-serif;
-    width : auto;
+﻿body {
+    font-family: "Lato", sans-serif;
+    width: auto;
+    
 }
 
 .main{
@@ -13,10 +14,11 @@
 }
 
 .signUp-form{
-    padding : 30px;
+    padding : 30px 10px;
 }
 
 .explain-area{
     padding : 50px;
 }
+
 

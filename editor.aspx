@@ -18,13 +18,13 @@
 </head>
 <body> 
     <form id="form_editor" runat="server">
-        <div class="container-fluid p-0 ">
+        <div class="container-fluid p-0 overflow-hidden">
             <div class="row min-vh-100">
-                <div class="col-md-2">
-                    <asp:Label ID="lbl_appTitle" runat="server" Text="InWordEditor" Font-Size="XX-Large" CssClass="pl-3 pb-3"></asp:Label>
+                <div class="col-md-2 col-lg-2 text-light" style="background-color : #0B3861">
+                    <asp:Label ID="lbl_appTitle" runat="server" Text="InWordEditor" Font-Size="XX-Large" CssClass="pl-3 pb-3 font-weight-bold" Font-Bold="True"></asp:Label>
                     <div class="user-status">
-                        
-                        <asp:Label ID="lbl_userID" runat="server" Text ="user test" CssClass="ml-2"></asp:Label>
+                        <asp:Label ID="lbl_userStatus" runat="server" CssClass="dot ml-3"></asp:Label>
+                        <asp:Label ID="lbl_userID" runat="server" CssClass="ml-2 font-weight-bold"></asp:Label>
                     </div>
                     <div class="explain_login ml-3 mt-4">
                         <asp:Label ID="lbl_loginExplain" runat="server" Text="로그인 하시면 <br/> 에디터의 더 많은 기능을 <br/>이용할 수 있습니다." Font-Size="Smaller"></asp:Label>
@@ -37,15 +37,15 @@
                     </div>
                 </div>
                 
-                <div class="col-md-10">
+                <div class="col-md-10 col-lg-10 pl-0" style="background-color : #0B3861">
                     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                         <span class="navbar-brand">기능</span>
                         <asp:Button ID="btn_callExcelFile" runat="server" Text="단어 포함 Excel 파일 불러오기" CssClass="btn btn-secondary" />
                         <asp:Button ID="btn_outputWord" runat="server" Text="word 파일로 추출" CssClass="btn btn-primary ml-3" />
                       
                     </nav>
-                    <div class="form-group">
-                        <asp:TextBox ID="txtbox_editor" runat="server" TextMode="MultiLine" CssClass="form-control h-auto d-inline-block"></asp:TextBox>
+                    <div class="form-group" style="height : 85vh">
+                        <asp:TextBox ID="txtbox_editor" runat="server" TextMode="MultiLine" CssClass="form-control h-100 mt-3"></asp:TextBox>
                     </div>
                 </div>
                 
