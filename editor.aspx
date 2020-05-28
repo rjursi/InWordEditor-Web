@@ -38,19 +38,24 @@
                 </div>
                 
                 <div class="col-md-10 col-lg-10 pl-0" style="background-color : #0B3861">
-                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                        <span class="navbar-brand">기능</span>
-                        <asp:Button ID="btn_callExcelFile" runat="server" Text="단어 포함 Excel 파일 불러오기" CssClass="btn btn-secondary" />
-                        <asp:Button ID="btn_outputWord" runat="server" Text="word 파일로 추출" CssClass="btn btn-primary ml-3" />
-                      
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
+                        <div>
+                            <span class="navbar-brand">기능</span>
+                            <asp:Button ID="btn_callExcelFile" runat="server" CssClass="btn btn-info mr-2" Text="불러온 엑셀파일 적용" OnClick="btn_callExcelFile_Click" />
+                            <asp:FileUpload ID="fileUpload_excelFile" runat="server"/>
+                            
+                        </div>
+                        <asp:Button ID="btn_outputWord" runat="server" Text="word 파일로 추출" CssClass="btn btn-primary ml-2" />
+                        
                     </nav>
                     <div class="form-group" style="height : 85vh">
                         <asp:TextBox ID="txtbox_editor" runat="server" TextMode="MultiLine" CssClass="form-control h-100 mt-3"></asp:TextBox>
                     </div>
                 </div>
-                
+               
             </div>
         </div>
+        
     </form>
 </body>
 </html>
