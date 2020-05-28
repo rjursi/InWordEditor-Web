@@ -26,14 +26,19 @@
                         <div class="form-group">    
                             <label>사용자 ID 혹은 이메일 주소</label>
                             <asp:TextBox ID="txtbox_signIn_userID" runat="server" CssClass="form-control" TextMode="SingleLine"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="requiredValidator_userID" runat="server" CssClass="text-danger mt-1" ControlToValidate="txtbox_signIn_userID" ErrorMessage="로그인 할 ID 나 이메일 주소를 입력하지 않았습니다." Display="Dynamic"></asp:RequiredFieldValidator>
+
                         </div>
                         <div class="form-group">
                             <label>패스워드</label>
-                            <asp:TextBox ID="txtbox_signIn_userPassword" runat="server" CssClass="form-control mb-5" TextMode="Password"></asp:TextBox>
+                            <asp:TextBox ID="txtbox_signIn_userPassword" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="requiredVaildator_userPassword" runat="server" CssClass="text-danger mt-1 mb-5" ControlToValidate="txtbox_signIn_userPassword" ErrorMessage="패스워드를 입력하지 않으셨습니다." Display="Dynamic"></asp:RequiredFieldValidator>
                         </div>
-                        <asp:Button ID="btn_signIn" runat="server" Text="로그인" CssClass="btn btn-block btn-success btn-custom-h" />
+
+                        <asp:Label ID="lbl_loginFail" runat="server" CssClass="text-danger"></asp:Label>
+                        <asp:Button ID="btn_signIn" runat="server" Text="로그인" CssClass="btn btn-block btn-success btn-custom-h" OnClick="btn_signIn_Click" />
                         <label class="pt-5">아직 회원이 아니신가요?</label>
-                        <asp:LinkButton ID="linkBtn_signUp" runat="server" PostBackUrl="~/signUp.aspx">여기를 눌러 회원가입 하세요</asp:LinkButton>
+                        <asp:LinkButton ID="linkBtn_signUp" runat="server" PostBackUrl="~/signUp.aspx" CausesValidation="False">여기를 눌러 회원가입 하세요</asp:LinkButton>
                     </div>
                 </div>        
             </div>

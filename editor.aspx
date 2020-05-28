@@ -24,16 +24,16 @@
                     <asp:Label ID="lbl_appTitle" runat="server" Text="InWordEditor" Font-Size="XX-Large" CssClass="pl-3 pb-3 font-weight-bold" Font-Bold="True"></asp:Label>
                     <div class="user-status">
                         <asp:Label ID="lbl_userStatus" runat="server" CssClass="dot ml-3"></asp:Label>
-                        <asp:Label ID="lbl_userID" runat="server" CssClass="ml-2 font-weight-bold"></asp:Label>
+                        <asp:Label ID="lbl_username" runat="server" CssClass="ml-2 font-weight-bold"></asp:Label>
                     </div>
                     <div class="explain_login ml-3 mt-4">
                         <asp:Label ID="lbl_loginExplain" runat="server" Text="로그인 하시면 <br/> 에디터의 더 많은 기능을 <br/>이용할 수 있습니다." Font-Size="Smaller"></asp:Label>
                     </div>
                     <div class="btn_logindiv">
-                        <asp:Button ID="btn_login" runat="server" Text="로그인하기" CssClass="btn btn-success ml-3 mt-2 w-75" />
+                        <asp:Button ID="btn_login" runat="server" Text="로그인하기" CssClass="btn btn-success ml-3 mt-2 w-75" OnClick="btn_login_Click" />
                     </div>
                     <div class="btn_exitdiv">
-                        <asp:Button ID="btn_exit" runat="server" Text="나가기" CssClass="btn btn-danger ml-3 mt-2 w-75" />
+                        <asp:Button ID="btn_exit" runat="server" Text="나가기" CssClass="btn btn-danger ml-3 mt-2 w-75" OnClick="btn_exit_Click" />
                     </div>
                 </div>
                 

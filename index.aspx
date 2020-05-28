@@ -18,9 +18,15 @@
 <body style="background-color : #1C1C1C">
     <form id="form_index" runat="server"> 
         <div class="container-fluid pl-0 pr-0 ml-0 mr-0 text-white overflow-hidden">
-            <nav class="navbar navbar-expand-lg justify-content-between pt-3 pb-3" style="background-color :  #151515">
+            <nav class="navbar navbar-expand-lg pt-3 pb-3 justify-content-between" style="background-color :  #151515">
                 <span class="navbar-brand font-weight-bold text-light ml-5">InWordEditor</span>
-                <asp:Button ID="btn_login" runat="server" Text="로그인" CssClass="btn btn-success mr-5" PostBackUrl="~/signIn.aspx" CausesValidation="False" />
+                <div>
+                    <asp:Label ID="lbl_hello" runat="server" CssClass="font-weight-bold text-light mr-2" Visible="false" Text="안녕하세요! "></asp:Label>
+                    <asp:Label ID="lbl_username" runat="server" CssClass="font-weight-bold text-light mr-5"></asp:Label>
+                    
+                    <asp:Button ID="btn_login" runat="server" Text="로그인" CssClass="btn btn-success" PostBackUrl="~/signIn.aspx" CausesValidation="False" />
+                    <asp:Button ID="btn_logout" runat="server" Text="로그아웃" CssClass="btn btn-danger mr-5" Visible="false" CausesValidation="False" OnClick="btn_logout_Click" />
+                </div>
             </nav>
             <div class="main" style="height : 85vh">
                 <div class="row justify-content-md-center">
@@ -29,11 +35,14 @@
                             <h1 class="font-weight-bold">Write your document<br />Only the words<br />You want.</h1><br />
                             <p style="color : #A4A4A4">단어가 포함되어 있는 엑셀 문서를 불러와 <br />
                             엑셀 파일에 포함된 단어로만 <br />새로운 문서를 작성해보세요.</p>
-                            <asp:Button ID="btn_noLoginStart" runat="server" Text="로그인 없이 체험" CssClass="btn mt-5 btn-block btn-primary btn-custom-h" CausesValidation="False" PostBackUrl="~/editor.aspx"/>
+                            <asp:Button ID="btn_noLoginStart" runat="server" Text="로그인 없이 체험" CssClass="btn mt-5 btn-block btn-primary btn-custom-h" CausesValidation="False" OnClick="btn_noLoginStart_Click"/>
                         </div>
                         
                     </div>
-                    <div class="col-lg-4 col-md-4 border bg-white rounded text-dark">
+                    <asp:Panel ID="panel_editorImage" runat="server" CssClass="col-lg-4 col-md-4" Visible="false">
+                        <asp:Image ID="img_editorImage" runat="server" ImageUrl="~/Image/editor.png" />
+                    </asp:Panel>
+                    <asp:Panel ID="panel_signUpForm" runat="server" CssClass="col-lg-4 col-md-4 border bg-white rounded text-dark">
                         <div class="signUp-form"> 
                             <div class="form-group">
                                 <label>사용자 ID</label>
@@ -54,7 +63,7 @@
                             </div>
                             <asp:Button ID="btn_signUp" runat="server" Text="회원가입" CssClass="btn btn-block btn-success btn-custom-h" OnClick="btn_signUp_Click" />
                         </div>
-                    </div>
+                     </asp:Panel> 
                 </div>
             </div>
         </div>
