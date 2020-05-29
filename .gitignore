@@ -4,3 +4,13 @@ Content/
 Scripts/
 packages.config
 Web.config
+
+# Ignore Package Files
+App_Code/
+App_Data/
+Bin/
+
+# Ignore Excel SavePath
+
+ForCheckExcelFile/
+
