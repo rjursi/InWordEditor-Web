@@ -18,8 +18,13 @@
 
     
     <script language="javascript" type="text/javascript">
+        
+
 
         function ExportToDocx() {
+
+           
+
             var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset=\'utf-8\'></head><body>";
             var postHtml = "</body></html>";
             var html = preHtml + document.getElementById("div_editor").innerHTML + postHtml;
@@ -50,15 +55,22 @@
             }
 
             document.body.removeChild(downloadLink);
-        }
+        } 
+            
+        
 
+        /*
         function alertTest() {
            alert(document.getElementById("div_editor").innerHTML);
         }
 
+        
+        */
         function setWord(words) {
             document.getElementById("words").value = words;
+            
         }
+
         function checkWord() {
 
             var checkStringArray = document.getElementById("words").value.split(",");
@@ -76,22 +88,24 @@
             document.getElementById("div_editor").innerHTML = inEditorString;
 
             
-            var index = 0;
-            var finded = 0;
+           
             for (var i = 0; i < checkStringArray.length; i++) {
                 var word = checkStringArray[i];
-                
+                var regex = new RegExp(word, "gimu");
 
-                inEditorString = inEditorString.replace(word, "<span style=\"color: #000000;\">" + word + "</span>");
+                finded = inEditorString.indexOf(word);
+                inEditorString = inEditorString.replace(regex, "<span style=\"color: #000000;\">" + word + "</span>");
 
                 console.log(word);
                 
             }
+
+            
             document.getElementById("div_editor").innerHTML = inEditorString;            
             console.log("change Finished");
+
+            alert("단어 유효성 검사가 완료되었습니다. \n빨간 글씨가 잇을 경우 필터링 목록에 해당되는 단어입니다.");
             
-            
-            return false;
         }
 
         
@@ -127,25 +141,28 @@
                             <asp:Button ID="btn_callExcelFile" runat="server" CssClass="btn btn-info mr-2" Text="불러온 엑셀파일 적용" OnClick="btn_callExcelFile_Click" />     
                             <asp:FileUpload ID="fileUpload_excelFile" runat="server"/>     
                             <asp:Label ID="lbl_uploadStatus" runat="server"></asp:Label>
-                            
+                            <asp:Button ID="btn_checkWord" runat="server" CssClass="btn btn-danger" Text="단어 유효성 확인" Visible="false" OnClientClick="checkWord(); return false;"/>    
                         </div>
-                        <asp:Button ID="btn_checkWord" runat="server" CssClass="btn btn-danger" Text="단어 유효성 확인" Visible="false" OnClientClick="checkWord(); return false;"/>
+                        
+                       
                         <asp:Button ID="btn_outputWord" runat="server" Text="word 파일로 추출" CssClass="btn btn-primary ml-2" OnClientClick="ExportToDocx(); return false;" />
                         
                     </nav>
                    
-                    <asp:Panel ID="panel_editor" runat="server">  
+                     
                         <div id="editor-container" >
-                            <div id="editor_menu" style="padding : 10px">
-                                <asp:Button ID="btn_bold" runat="server" Text="굵게" OnClientClick="document.execCommand('bold'); return false;" CssClass="btn btn-primary" />
-                                <asp:Button ID="btn_underline" runat="server" Text="밑줄" OnClientClick="document.execCommand('underline'); return false;" CssClass="btn btn-secondary"/>
-                                <asp:Button ID="btn_insertUnorderedList" runat="server" Text="순서 없는 글머리 기호" OnClientClick=" document.execCommand('insertUnorderedList'); return false;" CssClass="btn btn-warning"/>
-                                <asp:Button ID="btn_redo" runat="server" Text="이전" OnClientClick="document.execCommand('redo'); return false;" CssClass="btn btn-info"/>
-                                <asp:Button ID="btn_undo" runat="server" Text="취소" OnClientClick="document.execCommand('undo'); return false;" CssClass="btn btn-danger" />
-                            </div>
+                            <asp:Panel ID="panel_editor" runat="server"> 
+                                <div id="editor_menu" style="padding : 10px">
+                                    <asp:Button ID="btn_bold" runat="server" Text="굵게" OnClientClick="document.execCommand('bold'); return false;" CssClass="btn btn-primary" />
+                                    <asp:Button ID="btn_underline" runat="server" Text="밑줄" OnClientClick="document.execCommand('underline'); return false;" CssClass="btn btn-secondary"/>
+                                    <asp:Button ID="btn_insertUnorderedList" runat="server" Text="순서 없는 글머리 기호" OnClientClick=" document.execCommand('insertUnorderedList'); return false;" CssClass="btn btn-warning"/>
+                                    <asp:Button ID="btn_redo" runat="server" Text="이전" OnClientClick="document.execCommand('redo'); return false;" CssClass="btn btn-info"/>
+                                    <asp:Button ID="btn_undo" runat="server" Text="취소" OnClientClick="document.execCommand('undo'); return false;" CssClass="btn btn-danger" />
+                                </div>
+                            </asp:Panel> 
                             <div id="div_editor" contenteditable="true" spellcheck="false" style="height : 85vh" class="form-control bg-white"></div>
                         </div>
-                    </asp:Panel>      
+                         
                 </div>
                 
             </div>
