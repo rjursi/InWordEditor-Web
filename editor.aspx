@@ -1,28 +1,106 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="editor.aspx.cs" Inherits="editor" %>
-
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     
     <script src="Scripts/jquery-3.0.0.min.js"></script>
     <link href="Content/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/editor.css" rel="stylesheet" />
     <script src="Scripts/bootstrap.min.js" ></script>
+    <!--<script src="Scripts/custom/editor.js"></script>-->
 
+    
+    <script language="javascript" type="text/javascript">
 
-    <title>InWordEditor</title>
+        function ExportToDocx() {
+            var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset=\'utf-8\'></head><body>";
+            var postHtml = "</body></html>";
+            var html = preHtml + document.getElementById("div_editor").innerHTML + postHtml;
+
+            var blob = new Blob(['\ufeff', html], {
+                type: 'application/msword'
+            });
+
+            var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
+
+            var filename = 'document.doc';
+
+            var downloadLink = document.createElement("a");
+
+            document.body.appendChild(downloadLink);
+
+            if (navigator.msSaveOrOpenBlob) {
+                navigator.msSaveOrOpenBlob(blob, filename);
+            } else {
+                // Create a link to the file
+                downloadLink.href = url;
+
+                // Setting the file name
+                downloadLink.download = filename;
+
+                //triggering the function
+                downloadLink.click();
+            }
+
+            document.body.removeChild(downloadLink);
+        }
+
+        function alertTest() {
+           alert(document.getElementById("div_editor").innerHTML);
+        }
+
+        function setWord(words) {
+            document.getElementById("words").value = words;
+        }
+        function checkWord() {
+
+            var checkStringArray = document.getElementById("words").value.split(",");
+            var inEditorString = document.getElementById("div_editor").innerHTML;
+            var redColorStartTag = "<span style=\"color: #ff0000;\">";
+            var redColorEndTag = "</span>";
+         
+            
+            var myRegExp = /<(\/span|span)([^>]*)>/gim;
+
+            inEditorString = inEditorString.replace(myRegExp, "");
+            
+
+            inEditorString = redColorStartTag + inEditorString + redColorEndTag;
+            document.getElementById("div_editor").innerHTML = inEditorString;
+
+            
+            var index = 0;
+            var finded = 0;
+            for (var i = 0; i < checkStringArray.length; i++) {
+                var word = checkStringArray[i];
+                
+
+                inEditorString = inEditorString.replace(word, "<span style=\"color: #000000;\">" + word + "</span>");
+
+                console.log(word);
+                
+            }
+            document.getElementById("div_editor").innerHTML = inEditorString;            
+            console.log("change Finished");
+            
+            
+            return false;
+        }
+
+        
+
+    </script>
 </head>
 <body> 
     <form id="form_editor" runat="server">
-       
-        
-        <asp:ScriptManager ID="scriptManager_editor" runat="server"></asp:ScriptManager>
+       <asp:ScriptManager ID="scriptManager_editor" runat="server"></asp:ScriptManager>
         <div class="container-fluid p-0 overflow-hidden">
             <div class="row min-vh-100">
                 <div class="col-md-2 col-lg-2 text-light" style="background-color : #0B3861">
@@ -51,19 +129,30 @@
                             <asp:Label ID="lbl_uploadStatus" runat="server"></asp:Label>
                             
                         </div>
-                        <asp:Button ID="btn_checkWord" runat="server" CssClass="btn btn-danger" Text="단어 유효성 확인" Visible="false"/>
-                        <asp:Button ID="btn_outputWord" runat="server" Text="word 파일로 추출" CssClass="btn btn-primary ml-2" />
+                        <asp:Button ID="btn_checkWord" runat="server" CssClass="btn btn-danger" Text="단어 유효성 확인" Visible="false" OnClientClick="checkWord(); return false;"/>
+                        <asp:Button ID="btn_outputWord" runat="server" Text="word 파일로 추출" CssClass="btn btn-primary ml-2" OnClientClick="ExportToDocx(); return false;" />
                         
                     </nav>
-                    <div class="form-group bg-white" style="height : 85vh">
-                        <asp:TextBox ID="txtbox_editor" runat="server" TextMode="MultiLine" CssClass="form-control h-100 mt-3 bg-white"></asp:TextBox>
-                        <ajaxToolkit:HtmlEditorExtender ID="htmlEditorEx_editor" runat="server" EnableSanitization="true" TargetControlID="txtbox_editor" Enabled="true"></ajaxToolkit:HtmlEditorExtender>
-                    </div>
+                   
+                    <asp:Panel ID="panel_editor" runat="server">  
+                        <div id="editor-container" >
+                            <div id="editor_menu" style="padding : 10px">
+                                <asp:Button ID="btn_bold" runat="server" Text="굵게" OnClientClick="document.execCommand('bold'); return false;" CssClass="btn btn-primary" />
+                                <asp:Button ID="btn_underline" runat="server" Text="밑줄" OnClientClick="document.execCommand('underline'); return false;" CssClass="btn btn-secondary"/>
+                                <asp:Button ID="btn_insertUnorderedList" runat="server" Text="순서 없는 글머리 기호" OnClientClick=" document.execCommand('insertUnorderedList'); return false;" CssClass="btn btn-warning"/>
+                                <asp:Button ID="btn_redo" runat="server" Text="이전" OnClientClick="document.execCommand('redo'); return false;" CssClass="btn btn-info"/>
+                                <asp:Button ID="btn_undo" runat="server" Text="취소" OnClientClick="document.execCommand('undo'); return false;" CssClass="btn btn-danger" />
+                            </div>
+                            <div id="div_editor" contenteditable="true" spellcheck="false" style="height : 85vh" class="form-control bg-white"></div>
+                        </div>
+                    </asp:Panel>      
                 </div>
                 
             </div>
         </div>
-       
+        <input type="hidden" id="words" value="" />
+        
     </form>
+    
 </body>
 </html>
