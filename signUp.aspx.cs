@@ -51,7 +51,7 @@ public partial class signUp : System.Web.UI.Page
 
 
                 Session.Remove("userID");
-                Session.Remove("userPassword");
+                // Session.Remove("userPassword");
                 Session.Remove("userEmail");
             }
         }
@@ -84,7 +84,16 @@ public partial class signUp : System.Web.UI.Page
         cmd.Parameters.AddWithValue("@EmailAddress", email);
 
         cmd.Parameters.AddWithValue("@UserName", txtbox_signUp_userName.Text);
-        cmd.Parameters.AddWithValue("@Password", txtbox_signUp_userPassword.Text);
+        if(txtbox_signUp_userPassword.Visible == false)
+        {
+            cmd.Parameters.AddWithValue("@Password", Session["userPassword"].ToString());
+        }
+        else
+        {
+            cmd.Parameters.AddWithValue("@Password", txtbox_signUp_userPassword.Text);
+        }
+
+        Session.Remove("userPassword");
 
         string phoneNum = ddList_phoneNum_1.SelectedValue + '-' + txtbox_userPhoneNum_2.Text + '-' + txtbox_userPhoneNum_3.Text;
         cmd.Parameters.AddWithValue("@PhoneNum", phoneNum);

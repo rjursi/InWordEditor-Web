@@ -19,8 +19,18 @@
     <form id="form_index" runat="server"> 
         <div class="container-fluid pl-0 pr-0 ml-0 mr-0 text-white overflow-hidden">
             <nav class="navbar navbar-expand-lg pt-3 pb-3 justify-content-between" style="background-color :  #151515">
-                <span class="navbar-brand font-weight-bold text-light ml-5">InWordEditor</span>
+                
+                <span class="navbar-brand text-light ml-5 mr-5"><h2 class="font-weight-bold">InWordEditor</h2></span>
+                
+                <div class="navbar-collapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="List.aspx"><h5 class="text-info font-weight-bold">문의사항 게시판</h5></a>
+                        </li>
+                    </ul>    
+                </div>
                 <div>
+                    <asp:Button ID="btn_admin" runat="server" Text="관리자 페이지" CssClass="btn btn-primary mr-5" PostBackUrl="~/admin.aspx" CausesValidation="False" Visible="False" />
                     <asp:Label ID="lbl_hello" runat="server" CssClass="font-weight-bold text-light mr-2" Visible="false" Text="안녕하세요! "></asp:Label>
                     <asp:Label ID="lbl_username" runat="server" CssClass="font-weight-bold text-light mr-5"></asp:Label>
                     
@@ -36,6 +46,7 @@
                             <p style="color : #A4A4A4">단어가 포함되어 있는 엑셀 문서를 불러와 <br />
                             엑셀 파일에 포함된 단어로만 <br />새로운 문서를 작성해보세요.</p>
                             <asp:Button ID="btn_noLoginStart" runat="server" Text="로그인 없이 체험" CssClass="btn mt-5 btn-block btn-primary btn-custom-h" CausesValidation="False" OnClick="btn_noLoginStart_Click"/>
+                            <asp:Button ID="btn_start" runat="server" Text="에디터 시작" CssClass="btn mt-5 btn-block btn-primary btn-custom-h" CausesValidation="False" OnClick="btn_start_Click"/>
                         </div>
                         
                     </div>
@@ -59,7 +70,7 @@
                                 <label>사용할 패스워드</label>
                                 <asp:TextBox ID="txtbox_signUp_userPassword" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="requireFieldValidator_userPassword" runat="server" ErrorMessage="패스워드를 입력하지 않으셨습니다." ControlToValidate="txtbox_signUp_userPassword" Display="Dynamic" CssClass="text-danger mt-1"></asp:RequiredFieldValidator><br />
-                                <asp:RegularExpressionValidator ID="regularExVaildator_userPassword" runat="server" ErrorMessage="패스워드의 길이는 최소 8자 이상이여야 하며 최소 하나의 문자 및 숫자를 포함해야 합니다." ControlToValidate="txtbox_signUp_userPassword" Display="Dynamic" ValidationExpression="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" CssClass="text-danger"></asp:RegularExpressionValidator>
+                                <asp:RegularExpressionValidator ID="regularExVaildator_userPassword" runat="server" ErrorMessage="패스워드의 길이는 최소 8자 이상이여야 하며 최소 하나의 문자 및 숫자를 포함해야 합니다." ControlToValidate="txtbox_signUp_userPassword" Display="Dynamic" ValidationExpression="^.*(?=^.{8,}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[_!@#$%^&+=]).*$" CssClass="text-danger"></asp:RegularExpressionValidator>
                             </div>
                             <asp:Button ID="btn_signUp" runat="server" Text="회원가입" CssClass="btn btn-block btn-success btn-custom-h" OnClick="btn_signUp_Click" />
                         </div>

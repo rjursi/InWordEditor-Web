@@ -14,7 +14,7 @@ public partial class signIn : System.Web.UI.Page
 
     protected void btn_signIn_Click(object sender, EventArgs e)
     {
-        string username="";
+        string[] userInfo = new string[3];
         SqlConnection conn = new SqlConnection("Data Source=.\\SQLEXPRESS;" +
               "Initial Catalog=InWordEditor;" +
               "Integrated Security=True");
@@ -22,7 +22,7 @@ public partial class signIn : System.Web.UI.Page
 
         conn.Open();
 
-        string idSql = "SELECT username FROM Member WHERE UserID=@UserID AND Password=@Password";
+        string idSql = "SELECT username, userid, emailaddress FROM Member WHERE UserID=@UserID AND Password=@Password";
 
         SqlCommand cmd = new SqlCommand(idSql, conn);
 
@@ -37,12 +37,17 @@ public partial class signIn : System.Web.UI.Page
 
             while (rd.Read())
             {
-                username = rd["UserName"].ToString();
+                userInfo[0] = rd["UserName"].ToString();
+                userInfo[1] = rd["UserID"].ToString();
+                userInfo[2] = rd["EmailAddress"].ToString();
             }
 
             // ID 로그인 성공 했을 시 로직
 
-            Session["username"] = username;
+            Session["username"] = userInfo[0];
+            Session["userID"] = userInfo[1];
+            Session["userEmail"] = userInfo[2];
+
             if (!string.IsNullOrEmpty(Session["fromEditorLogin"] as string))
             {
                 Server.Transfer("editor.aspx");
@@ -59,18 +64,21 @@ public partial class signIn : System.Web.UI.Page
         else
         {
             rd.Close();
-            username = emailLoginCheck(conn);
+            userInfo = emailLoginCheck(conn);
         }
 
 
-        if (username.Equals(""))
+        if (userInfo[0].Equals(""))
         {
             lbl_loginFail.Text = "없는 ID, 이메일 이거나 잘못된 패스워드를 입력하였습니다.";
         }
         else
         {
             // 이메일 로그인 성공 했을 시 로직
-            Session["username"] = username;
+            Session["username"] = userInfo[0];
+            Session["userID"] = userInfo[1];
+            Session["userEmail"] = userInfo[2];
+
             if (!string.IsNullOrEmpty(Session["fromEditorLogin"] as string))
             {
                 Server.Transfer("editor.aspx");
@@ -87,12 +95,12 @@ public partial class signIn : System.Web.UI.Page
         
     }
 
-    string emailLoginCheck(SqlConnection conn)
+    string[] emailLoginCheck(SqlConnection conn)
     {
-        string emailSql = "SELECT username FROM Member WHERE EmailAddress=@Email AND Password=@Password";
+        string emailSql = "SELECT username, userid, emailaddress FROM Member WHERE EmailAddress=@Email AND Password=@Password";
 
         SqlCommand cmd = new SqlCommand(emailSql, conn);
-        string username="";
+        string[] userInfo = new string[3];
 
         cmd.Parameters.AddWithValue("@Email", txtbox_signIn_userID.Text);
         cmd.Parameters.AddWithValue("@Password", txtbox_signIn_userPassword.Text);
@@ -103,12 +111,18 @@ public partial class signIn : System.Web.UI.Page
         {
             while (rd.Read())
             {
-                username = rd["UserName"].ToString();
+                userInfo[0] = rd["UserName"].ToString();
+                userInfo[1] = rd["UserID"].ToString();
+                userInfo[2] = rd["EmailAddress"].ToString();
             }
 
-            
+
+        }
+        else
+        {
+            userInfo[0] = "";
         }
         rd.Close();
-        return username;
+        return userInfo;
     }
 }
