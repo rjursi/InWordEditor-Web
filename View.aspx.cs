@@ -64,7 +64,7 @@ public partial class View : System.Web.UI.Page
                     btn_submitReply.Visible = false;
                 }
 
-                if (lbl_writer.Text.Equals(Session["username"].ToString()) && Session["username"].ToString().Equals("김윤권(관리자)"))
+                if (lbl_writer.Text.Equals(Session["username"].ToString()) || Session["username"].ToString().Equals("김윤권(관리자)"))
                 {
                     btn_update.Visible = true;
                     btn_delete.Visible = true;
