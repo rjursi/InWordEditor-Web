@@ -63,7 +63,7 @@
 
                         </asp:GridView>
                  
-                         <asp:SqlDataSource ID="sqldataSource_list" runat="server" ConnectionString="<%$ ConnectionStrings:InWordEditorConnectionString %>" SelectCommand="SELECT [num], [name], [id], [email], [title], [writedate], [readcount], [depth] FROM [QuestionBoard]"></asp:SqlDataSource>
+                         <asp:SqlDataSource ID="sqldataSource_list" runat="server" ConnectionString="<%$ ConnectionStrings:InWordEditorConnectionString %>" SelectCommand="SELECT [num], [name], [id], [email], [title], [writedate], [readcount], [depth] FROM [QuestionBoard] ORDER BY [pos] DESC"></asp:SqlDataSource>
                     </div>
                     <div class="row w-100 justify-content-center mt-5">
                         
