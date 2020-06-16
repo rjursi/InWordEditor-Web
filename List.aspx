@@ -70,17 +70,17 @@
                        <asp:Button ID="btn_write" runat="server" Text="글쓰기" OnClick="btn_write_Click" CssClass="btn-success btn btn-lg"/>
                         
                     </div>
-                
+                 
             </div>
 
         </div>
         
-        <div>
+        </div>
             
             
          
             
-        </div>
+       
         
     </form>
 </body>
